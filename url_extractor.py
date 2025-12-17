@@ -5,11 +5,11 @@ import requests
 import util
 
 
-def construct_download_url(url_template: str, index: str):
+def construct_download_url(url_template: str, index: str, downloader_host: str):
     normal_url = url_template.format(index=index)
     ascii_url = urllib.parse.quote_plus(normal_url)
 
-    return "https://s4.youtube4kdownloader.com/ajax/getLinks.php?video=" + ascii_url + "&rand=" + get_decoded(normal_url)
+    return downloader_host + "/ajax/getLinks.php?video=" + ascii_url + "&rand=" + get_decoded(normal_url)
 
 
 def extract_urls(downloader_api_url, title):
@@ -90,6 +90,7 @@ if __name__ == '__main__':
 
     titles = conf["titles"]
     url_template = conf["url_template"]
+    downloader_host = conf["downloader_host"]
     file_name = conf["name"]
     preferred_quality = conf["preferred_quality"]
     preferred_ext = conf["preferred_ext"]
@@ -99,7 +100,7 @@ if __name__ == '__main__':
     for video_id, title in titles.items():
         print(video_id + ": " + title)
 
-        download_url = construct_download_url(url_template, video_id)
+        download_url = construct_download_url(url_template, video_id, downloader_host)
         try:
             result_list = extract_urls(download_url, title)
             write_to_file(file, result_list, preferred_quality, preferred_ext, honour_preferences)
