@@ -19,10 +19,8 @@ def read_urls(name):
 
 def download(file_name, url):
     if not os.path.isfile(file_name):
-        r = None
         try:
             with urllib.request.urlopen(url) as response:
-                r = response
                 headers = response.info()
                 if headers["Content-Type"] == "application/octet-stream":
                     print("%s: %s %s" % (str(datetime.datetime.now()), title, url))
@@ -34,7 +32,7 @@ def download(file_name, url):
         except urllib.error.URLError:
             print("skipping " + title)
         finally:
-            if r is not None:
+            if response is not None:
                 print("closing response")
                 response.close()
 
