@@ -1,8 +1,9 @@
 {
   "url_template": "<url:...{index}...>", // mast have index param in it
-  "downloader_host": "https://s6.youtube4kdownloader.com",//
+  "downloader_host": "https://s6.youtube4kdownloader.com",
+  "referer": "<referer url>",
   "name": "<playlist name>",
-  "preferred_quality": "480p",
+  "preferred_quality": "720p",
   "preferred_ext": "mpeg",
   "honour_preferences": true,
   "titles": {
